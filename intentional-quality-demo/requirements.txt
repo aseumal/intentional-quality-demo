@@ -1,0 +1,10 @@
+# Offline demo (what you run on stage)
+rich>=13
+langgraph>=1.0
+pytest>=8          # optional: lets you also run test_pricing.py with pytest
+
+# Live mode only (python demo.py --live): real LLM agents
+autogen-agentchat>=0.7
+autogen-ext[openai]>=0.7
+anthropic           # Claude via iq/llm_client.py
+crewai>=1.0

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Intentional Quality demo: recorded run</title>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #61cbf4; text-decoration-color: #61cbf4}
+.r2 {color: #61cbf4; text-decoration-color: #61cbf4; font-weight: bold}
+.r3 {color: #a9bcd3; text-decoration-color: #a9bcd3}
+.r4 {color: #1a1a1a; text-decoration-color: #1a1a1a; background-color: #61cbf4; font-weight: bold}
+.r5 {color: #c4c5b5; text-decoration-color: #c4c5b5; font-weight: bold}
+.r6 {background-color: #050c1a}
+.r7 {color: #727272; text-decoration-color: #727272; background-color: #050c1a}
+.r8 {color: #e6db74; text-decoration-color: #e6db74; background-color: #050c1a}
+.r9 {color: #66d9ef; text-decoration-color: #66d9ef; background-color: #050c1a}
+.r10 {color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #050c1a}
+.r11 {color: #a6e22e; text-decoration-color: #a6e22e; background-color: #050c1a}
+.r12 {color: #ff4689; text-decoration-color: #ff4689; background-color: #050c1a}
+.r13 {color: #ae81ff; text-decoration-color: #ae81ff; background-color: #050c1a}
+.r14 {color: #4ade80; text-decoration-color: #4ade80; font-weight: bold}
+.r15 {color: #ffc857; text-decoration-color: #ffc857; font-weight: bold}
+.r16 {color: #ff6b6b; text-decoration-color: #ff6b6b; font-weight: bold}
+.r17 {color: #ffc857; text-decoration-color: #ffc857}
+.r18 {color: #1a1a1a; text-decoration-color: #1a1a1a; background-color: #ffc857; font-weight: bold}
+.r19 {color: #1a1a1a; text-decoration-color: #1a1a1a; background-color: #a9bcd3; font-weight: bold}
+.r20 {color: #c4c5b5; text-decoration-color: #c4c5b5}
+.r21 {color: #4ade80; text-decoration-color: #4ade80}
+.r22 {color: #1a1a1a; text-decoration-color: #1a1a1a; background-color: #4ade80; font-weight: bold}
+.r23 {color: #c4a7ff; text-decoration-color: #c4a7ff}
+.r24 {color: #1a1a1a; text-decoration-color: #1a1a1a; background-color: #c4a7ff; font-weight: bold}
+.r25 {color: #a9bcd3; text-decoration-color: #a9bcd3; font-weight: bold}
+body {
+    color: #d9d9d9;
+    background-color: #0c0c0c;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">────── </span><span class="r2">Intentional Quality</span>  <span class="r3">mutation testing x agents x VRTQ x A2A   |   offline agents (deterministic, no network)</span><span class="r1"> ──────</span>
+<span class="r3">  Orchestrated by a LangGraph StateGraph: baseline &gt; mutate &gt; run &gt; debate &gt; rank &gt; write &gt; verify &gt; report</span>
+
+<span class="r1">───────────────────────────────── </span><span class="r4"> STEP 0 </span>  <span class="r5">The test suite our team trusts</span>   <span class="r1">[LangGraph] ─────────────────────────────────</span>
+<span class="r3">╭─────────────────────────────────────────── pricing.py ────────────────────────────────────────────╮</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 1 </span><span class="r8">&quot;&quot;&quot;Checkout rules for a Philippine online shop. This is the code under test.&quot;&quot;&quot;</span><span class="r6">             </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 2 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 3 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 4 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">discount</span><span class="r10">(total):</span><span class="r6">                                                                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 5 </span><span class="r10">    </span><span class="r8">&quot;&quot;&quot;10% promo on orders of PHP 1,000 or more.&quot;&quot;&quot;</span><span class="r6">                                         </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 6 </span><span class="r10">    </span><span class="r9">if</span><span class="r10"> total </span><span class="r12">&lt;</span><span class="r10"> </span><span class="r13">0</span><span class="r10">:</span><span class="r6">                                                                           </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 7 </span><span class="r10">        </span><span class="r9">raise</span><span class="r10"> </span><span class="r11">ValueError</span><span class="r10">(</span><span class="r8">&quot;total cannot be negative&quot;</span><span class="r10">)</span><span class="r6">                                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 8 </span><span class="r10">    </span><span class="r9">if</span><span class="r10"> total </span><span class="r12">&gt;=</span><span class="r10"> </span><span class="r13">1000</span><span class="r10">:</span><span class="r6">                                                                       </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7"> 9 </span><span class="r10">        </span><span class="r9">return</span><span class="r10"> </span><span class="r11">round</span><span class="r10">(total </span><span class="r12">*</span><span class="r10"> </span><span class="r13">0.9</span><span class="r10">, </span><span class="r13">2</span><span class="r10">)</span><span class="r6">                                                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">10 </span><span class="r10">    </span><span class="r9">return</span><span class="r10"> total</span><span class="r6">                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">11 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">12 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">13 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">shipping_fee</span><span class="r10">(total, in_metro_manila):</span><span class="r6">                                                   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">14 </span><span class="r10">    </span><span class="r8">&quot;&quot;&quot;Free shipping from PHP 1,500. Otherwise PHP 99 in Metro Manila, PHP 149 elsewhere.&quot;&quot;&quot;</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">15 </span><span class="r10">    </span><span class="r9">if</span><span class="r10"> total </span><span class="r12">&gt;=</span><span class="r10"> </span><span class="r13">1500</span><span class="r10">:</span><span class="r6">                                                                       </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">16 </span><span class="r10">        </span><span class="r9">return</span><span class="r10"> </span><span class="r13">0</span><span class="r6">                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">17 </span><span class="r10">    </span><span class="r9">return</span><span class="r10"> </span><span class="r13">99</span><span class="r10"> </span><span class="r9">if</span><span class="r10"> in_metro_manila </span><span class="r9">else</span><span class="r10"> </span><span class="r13">149</span><span class="r6">                                                   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">18 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">19 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">20 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">loyalty_points</span><span class="r10">(total):</span><span class="r6">                                                                  </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">21 </span><span class="r10">    </span><span class="r8">&quot;&quot;&quot;1 point per PHP 100 spent, capped at 50 points per order.&quot;&quot;&quot;</span><span class="r6">                         </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">22 </span><span class="r10">    points </span><span class="r12">=</span><span class="r10"> total </span><span class="r12">//</span><span class="r10"> </span><span class="r13">100</span><span class="r6">                                                                   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">23 </span><span class="r10">    </span><span class="r9">if</span><span class="r10"> points </span><span class="r12">&gt;</span><span class="r10"> </span><span class="r13">50</span><span class="r10">:</span><span class="r6">                                                                         </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">24 </span><span class="r10">        points </span><span class="r12">=</span><span class="r10"> </span><span class="r13">50</span><span class="r6">                                                                         </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">25 </span><span class="r10">    </span><span class="r9">return</span><span class="r10"> points</span><span class="r6">                                                                           </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">26 </span><span class="r6">                                                                                            </span> <span class="r3">│</span>
+<span class="r3">╰───────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r3">╭──────────────────────────────────────╮</span>
+<span class="r3">│</span>                                      <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r14">    100%     </span>      <span class="r14">    8 / 8    </span>   <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r3">line coverage</span>      <span class="r3">tests passing</span>   <span class="r3">│</span>
+<span class="r3">│</span>                                      <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────╯</span>
+<span class="r15">  Would you approve this pull request?</span>
+
+<span class="r1">──────────────────────────── </span><span class="r4"> STEP 1 </span>  <span class="r5">Plant bugs on purpose: generate mutants</span>   <span class="r1">[LangGraph] ─────────────────────────────</span>
+<span class="r3">  7 mutants: one small change each, every comparison, operator and branch.</span>
+
+<span class="r1">────────────────────────── </span><span class="r4"> STEP 2 </span>  <span class="r5">Run the existing tests against every mutant</span>   <span class="r1">[LangGraph] ───────────────────────────</span>
+                                                                                                 
+ <span class="r2"> # </span> <span class="r2"> function       </span> <span class="r2"> line </span> <span class="r2"> change         </span> <span class="r2"> mutated code                          </span> <span class="r2"> result   </span> 
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+  1   discount         6      &lt;  -&gt;  &lt;=        if total &lt;= 0:                          <span class="r16">SURVIVED</span>  
+  2   discount         8      &gt;=  -&gt;  &gt;        if total &gt; 1000:                        <span class="r16">SURVIVED</span>  
+  3   discount         9      *  -&gt;  /         return round(total / 0.9, 2)            <span class="r14">KILLED  </span>  
+  4   shipping_fee     15     &gt;=  -&gt;  &gt;        if total &gt; 1500:                        <span class="r16">SURVIVED</span>  
+  5   shipping_fee     17     swap if / else   return 149 if in_metro_manila else 99   <span class="r14">KILLED  </span>  
+  6   loyalty_points   22     //  -&gt;  *        points = total * 100                    <span class="r14">KILLED  </span>  
+  7   loyalty_points   23     &gt;  -&gt;  &gt;=        if points &gt;= 50:                        <span class="r16">SURVIVED</span>  
+                                                                                                 
+<span class="r3">╭──────────────────────────────────────────────────────╮</span>
+<span class="r3">│</span>                                                      <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r14">    100%     </span>      <span class="r16">     43%      </span>      <span class="r16">    4    </span>   <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r3">line coverage</span>      <span class="r3">mutation score</span>      <span class="r3">survivors</span>   <span class="r3">│</span>
+<span class="r3">│</span>                                                      <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────────────────────╯</span>
+<span class="r16">  Same tests. 100% coverage. But these survivors are bugs our suite would ship.</span>
+
+<span class="r17">──────────────────────── </span><span class="r18"> STEP 3 </span>  <span class="r5">Real gap, or equivalent mutant? The agents debate</span>   <span class="r17">[AutoGen] ─────────────────────────</span>
+<span class="r19">  A2A </span> <span class="r1">Mutation Orchestrator</span><span class="r3"> -&gt; </span><span class="r17">Equivalence Court</span><span class="r3">   message/send #1  judge-survivor</span>
+<span class="r3">╭────── what travels between agents ───────╮</span>
+<span class="r3">│</span> <span class="r10">{</span><span class="r6">                                       </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">  </span><span class="r12">&quot;jsonrpc&quot;</span><span class="r10">: </span><span class="r8">&quot;2.0&quot;</span><span class="r10">,</span><span class="r6">                     </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">  </span><span class="r12">&quot;id&quot;</span><span class="r10">: </span><span class="r13">1</span><span class="r10">,</span><span class="r6">                              </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">  </span><span class="r12">&quot;method&quot;</span><span class="r10">: </span><span class="r8">&quot;message/send&quot;</span><span class="r10">,</span><span class="r6">             </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">  </span><span class="r12">&quot;params&quot;</span><span class="r10">: {</span><span class="r6">                           </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">    </span><span class="r12">&quot;message&quot;</span><span class="r10">: {</span><span class="r6">                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      </span><span class="r12">&quot;role&quot;</span><span class="r10">: </span><span class="r8">&quot;user&quot;</span><span class="r10">,</span><span class="r6">                   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      </span><span class="r12">&quot;messageId&quot;</span><span class="r10">: </span><span class="r8">&quot;b403d1a2&quot;</span><span class="r10">,</span><span class="r6">          </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      </span><span class="r12">&quot;parts&quot;</span><span class="r10">: [</span><span class="r6">                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">        {</span><span class="r6">                               </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">          </span><span class="r12">&quot;kind&quot;</span><span class="r10">: </span><span class="r8">&quot;data&quot;</span><span class="r10">,</span><span class="r6">               </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">          </span><span class="r12">&quot;data&quot;</span><span class="r10">: {</span><span class="r6">                     </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;task&quot;</span><span class="r10">: </span><span class="r8">&quot;judge-survivor&quot;</span><span class="r10">,</span><span class="r6">   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;mutant_id&quot;</span><span class="r10">: </span><span class="r13">1</span><span class="r10">,</span><span class="r6">             </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;function&quot;</span><span class="r10">: </span><span class="r8">&quot;discount&quot;</span><span class="r10">,</span><span class="r6">     </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;line&quot;</span><span class="r10">: </span><span class="r13">6</span><span class="r10">,</span><span class="r6">                  </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;original&quot;</span><span class="r10">: </span><span class="r8">&quot;if total &lt; 0:&quot;</span><span class="r10">,</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">            </span><span class="r12">&quot;mutated&quot;</span><span class="r10">: </span><span class="r8">&quot;if total &lt;= 0:&quot;</span><span class="r6"> </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">          }</span><span class="r6">                             </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">        }</span><span class="r6">                               </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      ],</span><span class="r6">                                </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      </span><span class="r12">&quot;metadata&quot;</span><span class="r10">: {</span><span class="r6">                     </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">        </span><span class="r12">&quot;from&quot;</span><span class="r10">: </span><span class="r8">&quot;Mutation Orchestrator&quot;</span><span class="r10">,</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">        </span><span class="r12">&quot;to&quot;</span><span class="r10">: </span><span class="r8">&quot;Equivalence Court&quot;</span><span class="r6">       </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">      }</span><span class="r6">                                 </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">    }</span><span class="r6">                                   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">  }</span><span class="r6">                                     </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r10">}</span><span class="r6">                                       </span> <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────────╯</span>
+
+<span class="r2">  Mutant #1  discount  line 6:  if total &lt; 0:  -&gt;  if total &lt;= 0:</span>
+<span class="r16">             Gap Hunter  </span><span class="r20">The mutant changes line 6: `if total &lt; 0:`  became  `if total &lt;= 0:`. At discount(0) the original</span>
+<span class="r20">returns 0 but the mutant raises ValueError. Our suite never checks that input. That&#x27;s a real gap.</span>
+<span class="r15">   Equivalence Advocate  </span><span class="r20">I looked for a reason they&#x27;re the same. There isn&#x27;t one: they differ on 1 input(s) out of 20,022 </span>
+<span class="r20">tried. I concede.</span>
+<span class="r2">                  Judge  </span><span class="r20">VERDICT: REAL_GAP. Counterexample discount(0). Send it to the Test Writer.</span>
+<span class="r19">  A2A </span> <span class="r1">Mutation Orchestrator</span><span class="r3"> -&gt; </span><span class="r17">Equivalence Court</span><span class="r3">   message/send #2  judge-survivor</span>
+
+<span class="r2">  Mutant #2  discount  line 8:  if total &gt;= 1000:  -&gt;  if total &gt; 1000:</span>
+<span class="r16">             Gap Hunter  </span><span class="r20">The mutant changes line 8: `if total &gt;= 1000:`  became  `if total &gt; 1000:`. At discount(1000) the</span>
+<span class="r20">original returns 900.0 but the mutant returns 1000. Our suite never checks that input. That&#x27;s a real gap.</span>
+<span class="r15">   Equivalence Advocate  </span><span class="r20">I looked for a reason they&#x27;re the same. There isn&#x27;t one: they differ on 1 input(s) out of 20,022 </span>
+<span class="r20">tried. I concede.</span>
+<span class="r2">                  Judge  </span><span class="r20">VERDICT: REAL_GAP. Counterexample discount(1000). Send it to the Test Writer.</span>
+<span class="r19">  A2A </span> <span class="r1">Mutation Orchestrator</span><span class="r3"> -&gt; </span><span class="r17">Equivalence Court</span><span class="r3">   message/send #3  judge-survivor</span>
+
+<span class="r2">  Mutant #4  shipping_fee  line 15:  if total &gt;= 1500:  -&gt;  if total &gt; 1500:</span>
+<span class="r16">             Gap Hunter  </span><span class="r20">The mutant changes line 15: `if total &gt;= 1500:`  became  `if total &gt; 1500:`. At </span>
+<span class="r20">shipping_fee(1500, True) the original returns 0 but the mutant returns 99. Our suite never checks that input. That&#x27;s a </span>
+<span class="r20">real gap.</span>
+<span class="r15">   Equivalence Advocate  </span><span class="r20">I looked for a reason they&#x27;re the same. There isn&#x27;t one: they differ on 2 input(s) out of 40,042 </span>
+<span class="r20">tried. I concede.</span>
+<span class="r2">                  Judge  </span><span class="r20">VERDICT: REAL_GAP. Counterexample shipping_fee(1500, True). Send it to the Test Writer.</span>
+<span class="r19">  A2A </span> <span class="r1">Mutation Orchestrator</span><span class="r3"> -&gt; </span><span class="r17">Equivalence Court</span><span class="r3">   message/send #4  judge-survivor</span>
+
+<span class="r2">  Mutant #7  loyalty_points  line 23:  if points &gt; 50:  -&gt;  if points &gt;= 50:</span>
+<span class="r16">             Gap Hunter  </span><span class="r20">The mutant changes line 23: `if points &gt; 50:`  became  `if points &gt;= 50:`. Boundaries are where </span>
+<span class="r20">bugs live, so I suspect a gap.</span>
+<span class="r15">   Equivalence Advocate  </span><span class="r20">Look at what the branch does. When the compared value equals the boundary, the original skips the</span>
+<span class="r20">assignment and the mutant performs it, but both leave the same value. No input can tell them apart.</span>
+<span class="r2">                  Judge  </span><span class="r20">VERDICT: EQUIVALENT. Searched 20,014 inputs, found no difference. Exclude it from the score; no </span>
+<span class="r20">test can kill it.</span>
+
+<span class="r3">╭─────────────────────────────────────────────────────────────────────╮</span>
+<span class="r3">│</span>                                                                     <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r15">          1          </span>      <span class="r16">    3    </span>      <span class="r16">         50%         </span>   <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r3">equivalent (excluded)</span>      <span class="r3">real gaps</span>      <span class="r3">honest mutation score</span>   <span class="r3">│</span>
+<span class="r3">│</span>                                                                     <span class="r3">│</span>
+<span class="r3">╰─────────────────────────────────────────────────────────────────────╯</span>
+<span class="r3">  Mutation score = killed / (total - equivalent) = 3 / 6</span>
+
+<span class="r21">──────────────────────────────── </span><span class="r22"> STEP 4 </span>  <span class="r5">Which gap matters most? VRTQ decides</span>   <span class="r21">[VRTQ] ─────────────────────────────────</span>
+<span class="r19">  A2A </span> <span class="r1">Equivalence Court</span><span class="r3"> -&gt; </span><span class="r17">VRTQ Ranker</span><span class="r3">   message/send #5  rank-gaps</span>
+                                                                                            
+ <span class="r14"> mutant          </span> <span class="r14"> counterexample           </span> <span class="r14"> V .30 </span> <span class="r14"> R .35 </span> <span class="r14"> T .20 </span> <span class="r14"> Q .15 </span> <span class="r14"> VRTQ </span> <span class="r14"> tier </span> 
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+  #2 discount       discount(1000)             9       9       9       9       <span class="r5">9.00</span>   <span class="r16">P1  </span>  
+  #4 shipping_fee   shipping_fee(1500, True)   7       9       9       9       <span class="r5">8.40</span>   <span class="r16">P1  </span>  
+  #1 discount       discount(0)                5       4       9       9       <span class="r5">6.05</span>   <span class="r15">P2  </span>  
+                                                                                            
+<span class="r3">  VRTQ = 0.30 V + 0.35 R + 0.20 T + 0.15 Q     P1 &gt;= 7.0   P2 &gt;= 4.5</span>
+
+<span class="r23">────────────────────────────── </span><span class="r24"> STEP 5 </span>  <span class="r5">Write the tests that kill the real gaps</span>   <span class="r23">[CrewAI] ──────────────────────────────</span>
+<span class="r19">  A2A </span> <span class="r1">VRTQ Ranker</span><span class="r3"> -&gt; </span><span class="r17">Test Writer Crew</span><span class="r3">   message/send #6  write-killing-test</span>
+<span class="r3">╭───────── P1  kills mutant #2 ──────────╮</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">1 </span><span class="r12">from</span><span class="r10"> pricing </span><span class="r12">import</span><span class="r10"> discount</span><span class="r6">      </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">2 </span><span class="r6">                                  </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">3 </span><span class="r6">                                  </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">4 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">test_discount_at_1000</span><span class="r10">():</span><span class="r6">      </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">5 </span><span class="r10">    </span><span class="r9">assert</span><span class="r10"> discount(</span><span class="r13">1000</span><span class="r10">) </span><span class="r12">==</span><span class="r10"> </span><span class="r13">900.0</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">6 </span><span class="r6">                                  </span> <span class="r3">│</span>
+<span class="r3">╰────────────────────────────────────────╯</span>
+<span class="r21">  accepted: green on original, red on mutant</span>
+<span class="r19">  A2A </span> <span class="r1">VRTQ Ranker</span><span class="r3"> -&gt; </span><span class="r17">Test Writer Crew</span><span class="r3">   message/send #7  write-killing-test</span>
+<span class="r3">╭──────────── P1  kills mutant #4 ─────────────╮</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">1 </span><span class="r12">from</span><span class="r10"> pricing </span><span class="r12">import</span><span class="r10"> shipping_fee</span><span class="r6">        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">2 </span><span class="r6">                                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">3 </span><span class="r6">                                        </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">4 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">test_shipping_fee_at_1500_metro</span><span class="r10">():</span><span class="r6">  </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">5 </span><span class="r10">    </span><span class="r9">assert</span><span class="r10"> shipping_fee(</span><span class="r13">1500</span><span class="r10">, </span><span class="r9">True</span><span class="r10">) </span><span class="r12">==</span><span class="r10"> </span><span class="r13">0</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">6 </span><span class="r6">                                        </span> <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────────────╯</span>
+<span class="r21">  accepted: green on original, red on mutant</span>
+<span class="r19">  A2A </span> <span class="r1">VRTQ Ranker</span><span class="r3"> -&gt; </span><span class="r17">Test Writer Crew</span><span class="r3">   message/send #8  write-killing-test</span>
+<span class="r3">╭────── P2  kills mutant #1 ───────╮</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">1 </span><span class="r12">from</span><span class="r10"> pricing </span><span class="r12">import</span><span class="r10"> discount</span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">2 </span><span class="r6">                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">3 </span><span class="r6">                            </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">4 </span><span class="r9">def</span><span class="r10"> </span><span class="r11">test_discount_at_0</span><span class="r10">():</span><span class="r6">   </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">5 </span><span class="r10">    </span><span class="r9">assert</span><span class="r10"> discount(</span><span class="r13">0</span><span class="r10">) </span><span class="r12">==</span><span class="r10"> </span><span class="r13">0</span><span class="r6"> </span> <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">  </span><span class="r7">6 </span><span class="r6">                            </span> <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────╯</span>
+<span class="r21">  accepted: green on original, red on mutant</span>
+
+<span class="r1">─────────────────────────── </span><span class="r4"> STEP 6 </span>  <span class="r5">Run every mutant again, with the new tests</span>   <span class="r1">[LangGraph] ───────────────────────────</span>
+                                                                                                   
+ <span class="r2"> # </span> <span class="r2"> function       </span> <span class="r2"> line </span> <span class="r2"> change         </span> <span class="r2"> mutated code                          </span> <span class="r2"> result     </span> 
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+  1   discount         6      &lt;  -&gt;  &lt;=        if total &lt;= 0:                          <span class="r14">KILLED    </span>  
+  2   discount         8      &gt;=  -&gt;  &gt;        if total &gt; 1000:                        <span class="r14">KILLED    </span>  
+  3   discount         9      *  -&gt;  /         return round(total / 0.9, 2)            <span class="r14">KILLED    </span>  
+  4   shipping_fee     15     &gt;=  -&gt;  &gt;        if total &gt; 1500:                        <span class="r14">KILLED    </span>  
+  5   shipping_fee     17     swap if / else   return 149 if in_metro_manila else 99   <span class="r14">KILLED    </span>  
+  6   loyalty_points   22     //  -&gt;  *        points = total * 100                    <span class="r14">KILLED    </span>  
+  7   loyalty_points   23     &gt;  -&gt;  &gt;=        if points &gt;= 50:                        <span class="r15">EQUIVALENT</span>  
+                                                                                                   
+
+<span class="r3">──────────────────────────────────────────────── </span><span class="r19"> STEP 7 </span>  <span class="r5">Result</span>   <span class="r3">[A2A] ────────────────────────────────────────────────</span>
+<span class="r3">╭──────────────────────────────────────────────────────────────────╮</span>
+<span class="r3">│</span>                                                                  <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r25">100%  -&gt;  100%</span>      <span class="r14">43%  -&gt;  50%  -&gt;  100%</span>      <span class="r2">     8      </span>   <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r3">line coverage </span>      <span class="r3">    mutation score    </span>      <span class="r3">A2A messages</span>   <span class="r3">│</span>
+<span class="r3">│</span>                                                                  <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────────────────────────────────╯</span>
+<span class="r20">  Coverage never moved. The mutation score told us the truth, and agents helped us act on it,</span>
+<span class="r20">  within limits we set: evidence overrules the debate, and no test is accepted unless it kills its mutant.</span>
+</code></pre>
+</body>
+</html>
